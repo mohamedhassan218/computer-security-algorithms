@@ -15,7 +15,10 @@ Each algorithm is in separated folder, inside it you'll find two files one for e
 - Detailed comments to aid understanding.
 - Usage examples and test cases provided for each algorithm.
 
-## Algorithms Included 
+## Algorithms Included
+
+- **Rail Fence**.
+- 
 
 ## Usage
 
