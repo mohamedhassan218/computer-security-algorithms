@@ -8,6 +8,8 @@ This repository aims to offer robust implementations of essential computer secur
 
 Each algorithm is in separated folder, inside it you'll find two files one for encryption and the other to decryption.
 
+If you clicked any algorithm, you'll find a short video to catch the main idea of the algorithm.
+
 
 ## Features
 
@@ -17,7 +19,7 @@ Each algorithm is in separated folder, inside it you'll find two files one for e
 
 ## Algorithms Included
 
-- **Rail Fence**.
+- [**Rail Fence**](https://youtu.be/LEGPQ59bGZo?si=U0zgpy-gmO2_II8x).
 - 
 
 ## Usage
