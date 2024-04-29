@@ -6,9 +6,9 @@ Welcome to the Computer Security Algorithms repository, where we provide MATLAB 
 
 This repository aims to offer robust implementations of essential computer security algorithms. These algorithms are fundamental and basics to learn about the computer security.
 
-Each algorithm is in separated folder, inside it you'll find two files one for encryption and the other to decryption.
+Each algorithm is in separated folder, inside it you'll find three files one for encryption, another to decryption and a `main.m` file that test the two functions with the expected output.
 
-If you clicked any algorithm, you'll find a short video to catch the main idea of the algorithm.
+If you clicked on any algorithm form the list here, you'll find a short video to get the main idea of the algorithm.
 
 
 ## Features
@@ -19,7 +19,9 @@ If you clicked any algorithm, you'll find a short video to catch the main idea o
 
 ## Algorithms Included
 
-- [**Rail Fence**](https://youtu.be/LEGPQ59bGZo?si=U0zgpy-gmO2_II8x).
+- [**Rail Fence**](https://youtu.be/LEGPQ59bGZo?si=U0zgpy-gmO2_II8x)
+- [**Columnar Transposition**](https://youtu.be/vBIT9_MDiYU?si=qCl8DKruU9hGwNT7)
+- [**Simple Substitution**](https://youtube.com/shorts/qnlQTuQCTMA?si=31uRMu1N_tyTylHE)
 - 
 
 ## Usage
