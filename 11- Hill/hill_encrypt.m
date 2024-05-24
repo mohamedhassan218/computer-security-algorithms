@@ -1,55 +1,78 @@
-function Cipher_txt=hill_encrypt(Plain_txt,key,size)
-    Plain_txt=lower(Plain_txt);
-    Plain_txt=Plain_txt(Plain_txt~=' ');
-    key=lower(key);
-    key=key(key~=' ');
-    Chars='a':'z';
-    Cipher_txt='';
-    key_mat=zeros(size,size);
-    key_cnt=1;
-    char_cnt=1;
-    %loop to fill key matrix
-    for i=1:size
-        for j=1:size
-            %check if we reached the end of the key but havent finished filling
-            %the matrix , we then would fill it A(0),B(1),C(2)....
-            % subtract 1 to handle matlab start count from 1 and algorithm from
-            % start from 0
-            if key_cnt>length(key)
-                key_mat(i,j)=char_cnt-1;
-                char_cnt=char_cnt+1;
+%{
+    This function takes three args: the text to be
+        encrypted, the key and the size of the key matrix.
+%}
+function Cipher_txt = hill_encrypt(Plain_txt, key, size)
+    % Convert to lowercase and remove spaces.
+    Plain_txt = lower(Plain_txt);
+    Plain_txt = Plain_txt(Plain_txt ~= ' ');
+    key = lower(key);
+    key = key(key ~= ' ');
+
+    % String contains alphabets from a to z.
+    Chars = 'a':'z';
+
+    % Empty string that will contain our encrypted text.
+    Cipher_txt = '';
+
+    % Initialize a zero matrix of dimensions size x size to hold the key matrix.
+    key_mat = zeros(size, size);
+
+    % Variable to keep track of the position in the key.
+    key_cnt = 1;
+
+    % Variabl to provide filler characters if the key is too short.
+    % If the length of the encryption key (key) is shorter than
+    %    what is required to fill the entire key matrix,we need to fill the
+    %    remaining spaces in the matrix with additional characters.
+    char_cnt = 1;
+
+    % This block enables us to fill the key matrix.
+    for i = 1:size
+        for j = 1:size
+            if key_cnt > length(key)
+                key_mat(i, j) = char_cnt - 1;
+                char_cnt = char_cnt + 1;
             else
-                key_mat(i,j)=find(Chars==key(key_cnt))-1;
-                key_cnt=key_cnt+1;
+                key_mat(i, j) = find(Chars == key(key_cnt)) - 1;
+                key_cnt = key_cnt + 1;
             end
         end
     end
-    %check if the size of plain text is divisble by the size of matrix , if not
-    %then add X to the end until it is
-    div=mod(length(Plain_txt),size);
-    if div~=0
-        %add x, ex: if p=10 and size=3 we need to add 2 x to the end
-        for I=div : size-1
-            Plain_txt=strcat(Plain_txt,'x');
+
+    %{
+        Calculate the remainder when the length of Plain_txt is divided by size.
+        If 'div' is not zero, the plaintext is padded with 'x' characters
+            to make its length a multiple of size.
+    %}
+    div = mod(length(Plain_txt), size);
+    if div ~= 0
+        for I = div:size - 1
+            Plain_txt = strcat(Plain_txt, 'x');
         end
     end
-    for I=1:size:length(Plain_txt)
-        % divide plain text corresponding to given size
-        Plain_Chars=Plain_txt(I:I+size-1);
-        %create empty vector for plain indeces '1xsize'
-        Plain_Ind=zeros(1,size);
-        %find corresponding index for each letter in plain text
-        for j=1:size
-            Plain_Ind(j)=find(Chars==Plain_Chars(j))-1;
+
+    %{
+        Time to encrypt . . .
+        The outer loop iterates over Plain_txt in chunks of size.
+        'Plain_Chars' extracts a chunk of 'Plain_txt' of length size.
+        'Plain_Ind' is initialized to store the indices of the characters in 'Plain_Chars'.
+        The inner loop finds the index of each character in "Plain_Chars' within Chars and 
+            stores it in 'Plain_Ind'.
+        'Cipher_Ind' is calculated by multiplying the key matrix with 'Plain_Ind'
+            (transposed to a column vector), then taking modulo 26 of the result.
+    %}
+    for I = 1:size:length(Plain_txt)
+        Plain_Chars = Plain_txt(I:I + size - 1);
+        Plain_Ind = zeros(1, size);
+        for j = 1:size
+            Plain_Ind(j) = find(Chars == Plain_Chars(j)) - 1;
         end
-        %multiply key matrix with plain vector then take mod26
-        % note: that apply transpose to valid multiplication between matrix and
-        % vector 'sizexsize*sizex1' 
-        Cipher_Ind=key_mat*Plain_Ind';
-        Cipher_Ind=mod(Cipher_Ind,26)
-        %find corresponding latter for each index in cipher vectors
-        % add 1 to handel zero case
-        Cipher_txt(I:I+size-1)=Chars(Cipher_Ind+1);
+        Cipher_Ind = key_mat * Plain_Ind';
+        Cipher_Ind = mod(Cipher_Ind, 26);
+        Cipher_txt(I:I + size - 1) = Chars(Cipher_Ind + 1);
     end
-    Cipher_txt=upper(Cipher_txt);
+
+    % Convert our cipher text to UPPERCASE.
+    Cipher_txt = upper(Cipher_txt);
 end
