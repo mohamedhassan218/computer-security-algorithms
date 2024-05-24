@@ -1,5 +1,5 @@
 % Define your plaintext and number of rails
-plainText = 'Hello, World!';
+plainText = 'defend the east wall';
 rails = 3;
 
 % Encrypt the plaintext
@@ -11,5 +11,5 @@ decryptedText = railFenceDecrypt(cipherText, rails);
 disp(['Decrypted Text: ', decryptedText]);
 
 % The Output:
-    % Encrypted Text: Horel,ol!lWd
-    % Decrypted Text: Hello,World!
+    % Encrypted Text: dnetleedheswlftaa
+    % Decrypted Text: defendtheeastwall
